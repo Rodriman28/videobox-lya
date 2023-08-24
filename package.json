@@ -1,9 +1,9 @@
 {
-  "name": "videobox",
+  "name": "videobox-lya",
   "version": "1.0.0",
   "description": "Aplicacion de grabacion de video para VideoBox de LyA Studio",
   "main": "./out/main/index.js",
-  "author": "Rodrigo Romero",
+  "author": "MagicSoft - R.Romero",
   "homepage": "https://www.electronjs.org",
   "scripts": {
     "format": "prettier --write .",
