@@ -1,8 +1,15 @@
+/* eslint-disable prettier/prettier */
 import { resolve } from 'path'
 import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
 import react from '@vitejs/plugin-react'
+import commonjsExternals from 'vite-plugin-commonjs-externals';
+
+const externals = ['path', /^electron(\/.+)?$/];
 
 export default defineConfig({
+  optimizeDeps: {
+    exclude: externals,
+  },
   main: {
     plugins: [externalizeDepsPlugin()]
   },
@@ -15,6 +22,8 @@ export default defineConfig({
         '@renderer': resolve('src/renderer/src')
       }
     },
-    plugins: [react()]
+    plugins: [react(),commonjsExternals({
+    externals,
+  }),]
   }
 })

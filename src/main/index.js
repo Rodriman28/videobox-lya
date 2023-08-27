@@ -1,7 +1,12 @@
+/* eslint-disable prettier/prettier */
 import { app, shell, BrowserWindow } from 'electron'
-import { join } from 'path'
+import path from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { fileURLToPath } from 'url';
+
+const _dirname = path.dirname(fileURLToPath(import.meta.url))
+
 
 function createWindow() {
   // Create the browser window.
@@ -12,7 +17,7 @@ function createWindow() {
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
-      preload: join(__dirname, '../preload/index.js'),
+      preload: path.join(_dirname, '../preload/index.js'),
       sandbox: false
     }
   })
@@ -31,7 +36,7 @@ function createWindow() {
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
   } else {
-    mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
+    mainWindow.loadFile(path.join(_dirname, '../renderer/index.html'))
   }
 }
 

@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 // src/App.js
-import { BrowserRouter as Router, Route, Routes, HashRouter } from 'react-router-dom'
+import { Route, Routes, HashRouter } from 'react-router-dom'
 import WelcomePage from './components/WelcomePage'
 import CountdownPage from './components/CountdownPage'
 import RecordingPage from './components/RecordingPage'
