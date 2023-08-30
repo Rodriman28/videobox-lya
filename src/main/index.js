@@ -3,10 +3,11 @@ import { app, shell, BrowserWindow } from 'electron'
 import path from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'url'
+import { ipcMain } from 'electron'
+import fs from 'node:fs'
 
 const _dirname = path.dirname(fileURLToPath(import.meta.url))
-
 
 function createWindow() {
   // Create the browser window.
@@ -17,6 +18,8 @@ function createWindow() {
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
       preload: path.join(_dirname, '../preload/index.js'),
       sandbox: false
     }
@@ -39,6 +42,25 @@ function createWindow() {
     mainWindow.loadFile(path.join(_dirname, '../renderer/index.html'))
   }
 }
+
+// Listen for the 'save-file' message from the renderer process
+ipcMain.on('save-file', (event, data) => {
+  const { filePath, arrayBuffer } = data
+
+  const file = Buffer.from(arrayBuffer)
+  console.log(file)
+  // Save the file without showing the save dialog
+  fs.writeFileSync(filePath, file, { mode: 0o644 }, (err) => {
+    if (err) {
+      console.error('Error saving video:', err)
+      event.reply('save-video-response', { success: false, error: err })
+      return
+    }
+
+    console.log('Video saved successfully.')
+    event.reply('save-video-response', { success: true })
+  })
+})
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

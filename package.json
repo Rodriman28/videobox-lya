@@ -22,6 +22,7 @@
     "autoprefixer": "^10.4.15",
     "electron-updater": "^6.1.1",
     "file-saver": "^2.0.5",
+    "fs": "0.0.1-security",
     "fs-jetpack": "^5.1.0",
     "postcss": "^8.4.28",
     "react-router-dom": "^6.15.0",
