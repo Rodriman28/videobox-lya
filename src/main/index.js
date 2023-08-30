@@ -43,12 +43,25 @@ function createWindow() {
   }
 }
 
+ipcMain.on('create-folder', (event, data) => {
+  const { carpeta } = data
+
+  try {
+    if (!fs.existsSync(carpeta)) {
+      fs.mkdirSync(carpeta)
+    }
+  } catch (err) {
+    console.error(err)
+  }
+})
+
 // Listen for the 'save-file' message from the renderer process
 ipcMain.on('save-file', (event, data) => {
   const { filePath, arrayBuffer } = data
 
   const file = Buffer.from(arrayBuffer)
   console.log(file)
+
   // Save the file without showing the save dialog
   fs.writeFileSync(filePath, file, { mode: 0o644 }, (err) => {
     if (err) {

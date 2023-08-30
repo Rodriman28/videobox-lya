@@ -14,7 +14,7 @@ const CountdownPage = () => {
         clearInterval(timer)
         navigate('/recording')
       }
-    }, 900)
+    }, 950)
 
     return () => clearInterval(timer)
   }, [countdown, navigate])

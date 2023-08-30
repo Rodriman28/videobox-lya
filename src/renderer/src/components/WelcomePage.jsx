@@ -2,6 +2,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import logo from '../../../../resources/logo.svg'
+import { ipcRenderer } from 'electron'
 
 const WelcomePage = () => {
   const navigate = useNavigate()
@@ -9,6 +10,10 @@ const WelcomePage = () => {
   const startRecording = () => {
     navigate('/countdown')
   }
+
+  useEffect(() => {
+    ipcRenderer.send('create-folder', { carpeta: 'C:/videos-lya' })
+  }, [])
 
   useEffect(() => {
     const handleKeyPress = (event) => {

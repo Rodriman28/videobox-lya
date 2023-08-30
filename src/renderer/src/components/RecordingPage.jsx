@@ -43,11 +43,27 @@ const RecordingPage = () => {
       mediaRecorderRef.current.onstop = async () => {
         const blob = new Blob(chunksRef.current, { type: 'video/mp4' })
 
+        const date = new Date()
+        const dia = date
+          .toLocaleDateString('es-UY', { timeZone: 'America/Montevideo' })
+          .split('/')[0]
+        const mes = date
+          .toLocaleDateString('es-UY', { timeZone: 'America/Montevideo' })
+          .split('/')[1]
+        const anio = date
+          .toLocaleDateString('es-UY', { timeZone: 'America/Montevideo' })
+          .split('/')[2]
+
+        const hora = date.getHours()
+        const minutos = date.getMinutes()
+        const segundos = date.getSeconds()
+        const filename = `${dia}-${mes}-${anio}_${hora}-${minutos}-${segundos}`
+
         const fileReader = new FileReader()
         fileReader.onloadend = () => {
           const arrayBuffer = fileReader.result
           ipcRenderer.send('save-file', {
-            filePath: 'C:/Users/Maqsat Sop2/videoslya/video.mp4',
+            filePath: `C:/videos-lya/${filename}.mp4`,
             arrayBuffer: arrayBuffer
           })
         }
