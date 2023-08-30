@@ -3,7 +3,7 @@
 import { Route, Routes, HashRouter } from 'react-router-dom'
 import WelcomePage from './components/WelcomePage'
 import CountdownPage from './components/CountdownPage'
-import RecordingPage from './components/RecordingPage'
+import RecordingPage from './components/RP'
 import ThankYouPage from './components/ThankYouPage'
 
 const App = () => {
