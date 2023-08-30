@@ -2,13 +2,14 @@
 import { resolve } from 'path'
 import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
 import react from '@vitejs/plugin-react'
-import commonjsExternals from 'vite-plugin-commonjs-externals';
+import commonjsExternals from 'vite-plugin-commonjs-externals'
 
-const externals = ['path', /^electron(\/.+)?$/];
+const externals = ['path', /^electron(\/.+)?$/]
 
 export default defineConfig({
   optimizeDeps: {
     exclude: externals,
+    incluide: ['electron']
   },
   main: {
     plugins: [externalizeDepsPlugin()]
@@ -22,8 +23,11 @@ export default defineConfig({
         '@renderer': resolve('src/renderer/src')
       }
     },
-    plugins: [react(),commonjsExternals({
-    externals,
-  }),]
+    plugins: [
+      react(),
+      commonjsExternals({
+        externals
+      })
+    ]
   }
 })

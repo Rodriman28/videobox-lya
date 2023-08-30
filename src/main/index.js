@@ -3,10 +3,11 @@ import { app, shell, BrowserWindow } from 'electron'
 import path from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'url'
+import { ipcMain } from 'electron'
+import { saveAs } from 'file-saver'
 
 const _dirname = path.dirname(fileURLToPath(import.meta.url))
-
 
 function createWindow() {
   // Create the browser window.
@@ -17,6 +18,7 @@ function createWindow() {
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
+      nodeIntegration: true,
       preload: path.join(_dirname, '../preload/index.js'),
       sandbox: false
     }
@@ -39,6 +41,13 @@ function createWindow() {
     mainWindow.loadFile(path.join(_dirname, '../renderer/index.html'))
   }
 }
+
+ipcMain.on('save-file', (event, data) => {
+  const { filePath, fileContent } = data
+
+  console.log(filePath, fileContent)
+  // saveAs(blob, filename + '.mp4')
+})
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
