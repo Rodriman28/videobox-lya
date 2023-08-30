@@ -9,6 +9,24 @@ const RecordingPage = () => {
   const mediaRecorderRef = useRef(null)
   const chunksRef = useRef([])
 
+  function stopRecording() {
+    mediaRecorderRef.current.stop()
+  }
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key === '5') {
+        stopRecording()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyPress)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [])
+
   useEffect(() => {
     async function startRecording() {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -21,11 +39,9 @@ const RecordingPage = () => {
 
       mediaRecorderRef.current.ondataavailable = (e) => {
         chunksRef.current.push(e.data)
-        console.log(chunksRef.current)
       }
       mediaRecorderRef.current.onstop = async () => {
         const blob = new Blob(chunksRef.current, { type: 'video/mp4' })
-        console.log('Grabacion detenida')
 
         const fileReader = new FileReader()
         fileReader.onloadend = () => {
@@ -41,11 +57,9 @@ const RecordingPage = () => {
     }
     setTimeout(() => {
       mediaRecorderRef.current.stop()
-    }, 5000)
+    }, 60000)
 
-    return () => {
-      startRecording()
-    }
+    startRecording()
   }, [navigate])
 
   ipcRenderer.on('save-video-response', (event, response) => {
