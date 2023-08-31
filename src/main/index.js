@@ -45,17 +45,19 @@ function createWindow() {
   }
 }
 
-ipcMain.on('create-folder', (event, data) => {
-  const { carpeta } = data
+// Creacion de carpeta en caso de ser necesario
 
-  try {
-    if (!fs.existsSync(carpeta)) {
-      fs.mkdirSync(carpeta)
-    }
-  } catch (err) {
-    console.error(err)
-  }
-})
+// ipcMain.on('create-folder', (event, data) => {
+//   const { carpeta } = data
+
+//   try {
+//     if (!fs.existsSync(carpeta)) {
+//       fs.mkdirSync(carpeta)
+//     }
+//   } catch (err) {
+//     console.error(err)
+//   }
+// })
 
 // Listen for the 'save-file' message from the renderer process
 ipcMain.on('save-file', (event, data) => {

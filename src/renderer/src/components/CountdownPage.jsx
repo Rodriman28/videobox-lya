@@ -21,7 +21,7 @@ const CountdownPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <h2 className="text-9xl mb-4 animate-ping animate-once animate-duration-1000 animate-ease-in font-bold text-white">
+      <h2 className="lg:text-9xl text-8xl mb-4 animate-ping animate-once animate-duration-1000 animate-ease-in font-bold text-white">
         {countdown}
       </h2>
     </div>
