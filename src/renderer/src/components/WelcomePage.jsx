@@ -13,15 +13,14 @@ const WelcomePage = () => {
   }
 
   const date = new Date()
-  const folderName = date.toLocaleDateString('es-UY', { timeZone: 'America/Montevideo' }).split('/')
 
   // Evento para crear carpeta a travez del main
 
-  // useEffect(() => {
-  //   ipcRenderer.send('create-folder', {
-  //     carpeta: `D:/${folderName[0]}-${folderName[1]}-${folderName[2]}`
-  //   })
-  // }, [])
+  useEffect(() => {
+    ipcRenderer.send('create-folder', {
+      carpeta: `C:/videobox`
+    })
+  }, [])
 
   useEffect(() => {
     const handleKeyPress = (event) => {

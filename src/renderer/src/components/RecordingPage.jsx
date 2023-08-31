@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Webcam from 'react-webcam'
 import { ipcRenderer } from 'electron'
 import Spinner from './Spinner/Spinner'
+import ffmpeg from 'fluent-ffmpeg'
 
 const RecordingPage = () => {
   const timer = 60
@@ -77,11 +78,20 @@ const RecordingPage = () => {
         const segundos = date.getSeconds()
         const filename = `${dia}-${mes}-${anio}_${hora}-${minutos}-${segundos}`
 
+        ffmpeg.ffprobe(blob, (err, metadata) => {
+          if (err) {
+            console.error(err)
+            return
+          }
+          const duration = metadata.format.duration
+          console.log(`Duración del video: ${duration} segundos`)
+        })
+
         const fileReader = new FileReader()
         fileReader.onloadend = () => {
           const arrayBuffer = fileReader.result
           ipcRenderer.send('save-file', {
-            filePath: `D:/${filename}.mp4`,
+            filePath: `C:/videobox/${filename}.mp4`,
             arrayBuffer: arrayBuffer
           })
         }

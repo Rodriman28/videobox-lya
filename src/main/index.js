@@ -6,6 +6,7 @@ import icon from '../../resources/icon.png?asset'
 import { fileURLToPath } from 'url'
 import { ipcMain } from 'electron'
 import fs from 'node:fs'
+import ffmpeg from "fluent-ffmpeg"
 
 const _dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -47,17 +48,17 @@ function createWindow() {
 
 // Creacion de carpeta en caso de ser necesario
 
-// ipcMain.on('create-folder', (event, data) => {
-//   const { carpeta } = data
+ipcMain.on('create-folder', (event, data) => {
+  const { carpeta } = data
 
-//   try {
-//     if (!fs.existsSync(carpeta)) {
-//       fs.mkdirSync(carpeta)
-//     }
-//   } catch (err) {
-//     console.error(err)
-//   }
-// })
+  try {
+    if (!fs.existsSync(carpeta)) {
+      fs.mkdirSync(carpeta)
+    }
+  } catch (err) {
+    console.error(err)
+  }
+})
 
 // Listen for the 'save-file' message from the renderer process
 ipcMain.on('save-file', (event, data) => {
