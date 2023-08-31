@@ -1,10 +1,12 @@
 {
   "name": "videobox-lya",
+  "productName": "Videobox LyA",
   "version": "1.0.0",
   "description": "Aplicacion de grabacion de video para VideoBox de LyA Studio",
   "main": "./out/main/index.js",
-  "author": "MagicSoft - R.Romero",
+  "author": "MagicSoft - R. Romero",
   "homepage": "https://www.electronjs.org",
+  "license": "Attribution 4.0 International (CC BY 4.0)",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
