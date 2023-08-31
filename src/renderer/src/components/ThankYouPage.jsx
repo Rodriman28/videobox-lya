@@ -16,10 +16,6 @@ const ThankYouPage = () => {
       }
     }, 1000)
 
-    // const timeout = setTimeout(() => {
-    //   navigate("/");
-    // }, 10000);
-
     return () => clearTimeout(countdownTimer)
   }, [countdown, navigate])
 
