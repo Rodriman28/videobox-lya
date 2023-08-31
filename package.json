@@ -4,8 +4,10 @@
   "version": "1.0.0",
   "description": "Aplicacion de grabacion de video para VideoBox de LyA Studio",
   "main": "./out/main/index.js",
-  "author": "MagicSoft - R. Romero",
-  "homepage": "https://www.electronjs.org",
+  "author": {
+    "name": "Rodrigo Romero - MagicSoft",
+    "email": "rodri.rirs@gmail.com"
+  },
   "license": "Attribution 4.0 International (CC BY 4.0)",
   "scripts": {
     "format": "prettier --write .",

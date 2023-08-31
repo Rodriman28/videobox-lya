@@ -106,6 +106,12 @@ const RecordingPage = () => {
     }
   })
 
+  const videoConstraints = {
+    width: 1920,
+    height: 1080
+    // facingMode: 'user'
+  }
+
   return (
     <>
       <div className="flex flex-col items-center justify-center h-screen">
@@ -117,8 +123,10 @@ const RecordingPage = () => {
         <Webcam
           audio={false}
           ref={webcamRef}
-          style={{ width: '100%', height: 'auto' }}
-          className="object-cover"
+          width={1920}
+          height={1080}
+          videoConstraints={videoConstraints}
+          className=""
         />
         {isRecording ? (
           <div className="bg-black rounded-lg text-2xl absolute bottom-5 right-5 px-2 py-1 text-white font-bold">
