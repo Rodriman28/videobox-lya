@@ -12,6 +12,7 @@ const _dirname = path.dirname(fileURLToPath(import.meta.url))
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    title: 'Videobox LyA',
     fullscreen: true,
     width: 900,
     height: 670,
