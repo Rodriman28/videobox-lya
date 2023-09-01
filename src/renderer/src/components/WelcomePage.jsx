@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import logo from '../../../../resources/logo.svg'
 import by from '../../../../resources/by.svg'
+import audiologo from '../../../../resources/audiologo.mp4'
 // import boton from '../../../../resources/boton.png'
 
 const WelcomePage = () => {
@@ -28,15 +29,20 @@ const WelcomePage = () => {
 
   return (
     <div className="flex flex-col items-center pt-10 h-screen text-white">
-      <img src={logo} alt="Logo de LYA Studio" width={'40%'} className="pb-4" />
-      <h1 className="text-6xl pb-16 uppercase text-black">VideoBox</h1>
+      {/* <img src={logo} alt="Logo de LYA Studio" width={'40%'} className="pb-4" /> */}
+      <div className="flex items-center justify-center">
+        <video autoPlay loop width={'50%'} className="mb-10 rounded-lg">
+          <source src={audiologo} type="video/mp4"></source>
+        </video>
+      </div>
+      {/* <h1 className="text-6xl pb-16 uppercase text-black">VideoBox</h1> */}
       <p className="text-black text-xl lg:text-3xl font-bold pb-5">
         ¡Graba un video de hasta 1 minuto para tus seres queridos!
       </p>
       <p className="text-black bg-clip-text text-xl lg:text-3xl font-bold pb-5">
         Puedes finalizar el mensaje antes volviendo a presionar el botón.
       </p>
-      <p className="animate-pulse animate-infinite animate-duration-[3000ms] animate-ease-in text-2xl lg:text-4xl font-bold pt-10 lg:pt-20">
+      <p className="animate-pulse animate-infinite animate-duration-[3000ms] animate-ease-in text-2xl lg:text-4xl font-bold pt-10 lg:pt-15">
         ¡Presiona el botón para comenzar a grabar tu mensaje!
       </p>
       {/* <img src={boton} alt="icono boton rojo" width={'5%'} className="pt-10 " /> */}

@@ -10,7 +10,8 @@ import NoHayDisco from './components/NoHayDisco'
 
 const App = () => {
   return (
-    <div className="bg-gradient-to-r from-indigo-700 via-blue-600 to-sky-400 h-screen animate-gradient-anim">
+    <div className="bg-black h-screen ">
+      {/* <div className="bg-gradient-to-r from-indigo-700 via-blue-600 to-sky-400 h-screen animate-gradient-anim"> */}
       <HashRouter>
         <Routes>
           <Route exact path="/" element={<Tutorial />} />
