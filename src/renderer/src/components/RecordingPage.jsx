@@ -3,10 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import Webcam from 'react-webcam'
 import { ipcRenderer } from 'electron'
 import Spinner from './Spinner/Spinner'
-import ffmpeg from 'fluent-ffmpeg'
 
 const RecordingPage = () => {
-  const timer = 60
+  const timer = import.meta.env.RENDERER_VITE_TIMER
   const webcamRef = useRef(null)
   const navigate = useNavigate()
   const mediaRecorderRef = useRef(null)
@@ -44,11 +43,13 @@ const RecordingPage = () => {
     async function startRecording() {
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: true,
-        video: true
+        video: {
+          width: { min: 1280, ideal: 1920, max: 1920 },
+          height: { min: 720, ideal: 1080, max: 1080 }
+        }
       })
-
       mediaRecorderRef.current = new MediaRecorder(stream)
-
+      console.log(mediaRecorderRef.current)
       mediaRecorderRef.current.start()
 
       mediaRecorderRef.current.onstart = () => {
@@ -78,20 +79,11 @@ const RecordingPage = () => {
         const segundos = date.getSeconds()
         const filename = `${dia}-${mes}-${anio}_${hora}-${minutos}-${segundos}`
 
-        ffmpeg.ffprobe(blob, (err, metadata) => {
-          if (err) {
-            console.error(err)
-            return
-          }
-          const duration = metadata.format.duration
-          console.log(`Duración del video: ${duration} segundos`)
-        })
-
         const fileReader = new FileReader()
         fileReader.onloadend = () => {
           const arrayBuffer = fileReader.result
           ipcRenderer.send('save-file', {
-            filePath: `C:/videobox/${filename}.mp4`,
+            fileName: `${filename}.mp4`,
             arrayBuffer: arrayBuffer
           })
         }
@@ -116,31 +108,26 @@ const RecordingPage = () => {
     }
   })
 
-  const videoConstraints = {
-    width: 1920,
-    height: 1080
-    // facingMode: 'user'
-  }
-
   return (
     <>
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div className="flex flex-col items-center justify-center h-screen overflow-hidden">
         {!isRecording && (
           <div className="absolute">
             <Spinner />
           </div>
         )}
-        <Webcam
-          audio={false}
-          ref={webcamRef}
-          width={1920}
-          height={1080}
-          videoConstraints={videoConstraints}
-          className=""
-        />
+        <Webcam audio={true} ref={webcamRef} width={1920} height={1080} />
         {isRecording ? (
-          <div className="bg-black rounded-lg text-2xl absolute bottom-5 right-5 px-2 py-1 text-white font-bold">
-            {countdown}
+          <div className=" rounded-lg absolute bottom-8 right-8 px-2 py-1 align-middle justify-center ">
+            <p
+              className={`${
+                countdown <= 10
+                  ? 'text-6xl text-red-600 animate-ping animate-once animate-duration-[990ms] animate-ease-in'
+                  : 'text-8xl text-transparent bg-gradient-to-t from-indigo-900 via-blue-700 to-sky-500 bg-clip-text'
+              }  font-bold`}
+            >
+              {countdown}
+            </p>
           </div>
         ) : null}
       </div>

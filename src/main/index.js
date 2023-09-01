@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 import { app, shell, BrowserWindow } from 'electron'
 import path from 'path'
@@ -6,7 +7,6 @@ import icon from '../../resources/icon.png?asset'
 import { fileURLToPath } from 'url'
 import { ipcMain } from 'electron'
 import fs from 'node:fs'
-import ffmpeg from "fluent-ffmpeg"
 
 const _dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -15,8 +15,8 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     title: 'Videobox LyA',
     fullscreen: true,
-    width: 900,
-    height: 670,
+    width: 1024,
+    height: 768,
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
@@ -46,25 +46,22 @@ function createWindow() {
   }
 }
 
-// Creacion de carpeta en caso de ser necesario
-
-ipcMain.on('create-folder', (event, data) => {
-  const { carpeta } = data
-
+// Comprueba que el disco D: exista
+ipcMain.handle('search-disk', (event, data) => {
   try {
-    if (!fs.existsSync(carpeta)) {
-      fs.mkdirSync(carpeta)
-    }
-  } catch (err) {
-    console.error(err)
+    if (!fs.existsSync(import.meta.env.MAIN_VITE_DISK)) return true
+    return false
+  } catch (error) {
+    console.error(error)
   }
 })
 
 // Listen for the 'save-file' message from the renderer process
 ipcMain.on('save-file', (event, data) => {
-  const { filePath, arrayBuffer } = data
+  const { fileName, arrayBuffer } = data
 
   const file = Buffer.from(arrayBuffer)
+  const filePath = `${import.meta.env.MAIN_VITE_DISK}/${fileName}`
   console.log(file)
 
   // Save the file without showing the save dialog

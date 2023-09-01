@@ -24,9 +24,7 @@
     "@electron-toolkit/preload": "^2.0.0",
     "@electron-toolkit/utils": "^2.0.0",
     "electron-updater": "^6.1.1",
-    "ffmpeg": "^0.0.4",
     "file-saver": "^2.0.5",
-    "fluent-ffmpeg": "^2.1.2",
     "react-router-dom": "^6.15.0",
     "react-webcam": "^7.1.1",
     "vite-plugin-commonjs-externals": "^0.1.3"

@@ -1,4 +1,4 @@
-# videobox-lya
+# videobox
 
 An Electron application with React
 

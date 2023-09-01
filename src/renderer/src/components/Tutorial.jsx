@@ -2,9 +2,19 @@ import { useEffect } from 'react'
 import logo from '../../../../resources/logo.svg'
 import { useNavigate } from 'react-router-dom'
 import by from '../../../../resources/by.svg'
+import { ipcRenderer } from 'electron'
 
 export default function Tutorial() {
   const navigate = useNavigate()
+
+  useEffect(() => {
+    function comprobarDisco() {
+      ipcRenderer.invoke('search-disk').then((result) => {
+        if (result) navigate('/no-disk')
+      })
+    }
+    comprobarDisco()
+  }, [])
 
   useEffect(() => {
     const handleKeyPress = (event) => {
@@ -51,7 +61,7 @@ export default function Tutorial() {
       </p>
       <div className="flex items-center absolute bottom-2 text-black font-medium">
         <img src={by} width="70em" alt="Creative Commons logo" className="mx-2 rounded-md" />
-        <p className="text-xs ">
+        <p className="text-xs lg:text-sm">
           VIDEOBOX by Rodrigo Romero - MagicSoft is licensed under a Attribution 4.0 International
           (CC BY 4.0)
         </p>

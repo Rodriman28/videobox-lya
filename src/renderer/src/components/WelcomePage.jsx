@@ -2,8 +2,8 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import logo from '../../../../resources/logo.svg'
-import { ipcRenderer } from 'electron'
 import by from '../../../../resources/by.svg'
+// import boton from '../../../../resources/boton.png'
 
 const WelcomePage = () => {
   const navigate = useNavigate()
@@ -11,16 +11,6 @@ const WelcomePage = () => {
   const startRecording = () => {
     navigate('/countdown')
   }
-
-  const date = new Date()
-
-  // Evento para crear carpeta a travez del main
-
-  useEffect(() => {
-    ipcRenderer.send('create-folder', {
-      carpeta: `C:/videobox`
-    })
-  }, [])
 
   useEffect(() => {
     const handleKeyPress = (event) => {
@@ -43,15 +33,17 @@ const WelcomePage = () => {
       <p className="text-black text-xl lg:text-3xl font-bold pb-5">
         ¡Graba un video de hasta 1 minuto para tus seres queridos!
       </p>
-      <p className="text-black text-xl lg:text-3xl font-bold pb-5">
+      <p className="text-black bg-clip-text text-xl lg:text-3xl font-bold pb-5">
         Puedes finalizar el mensaje antes volviendo a presionar el botón.
       </p>
-      <p className="animate-pulse animate-infinite animate-duration-[3000ms] animate-ease-in text-2xl lg:text-4xl font-bold pt-5">
-        ¡Presiona el botón rojo para comenzar a grabar tu mensaje!
+      <p className="animate-pulse animate-infinite animate-duration-[3000ms] animate-ease-in text-2xl lg:text-4xl font-bold pt-10 lg:pt-20">
+        ¡Presiona el botón para comenzar a grabar tu mensaje!
       </p>
+      {/* <img src={boton} alt="icono boton rojo" width={'5%'} className="pt-10 " /> */}
+
       <div className="flex items-center absolute bottom-2 text-black font-medium">
         <img src={by} width="70em" alt="Creative Commons logo" className="mx-2 rounded-md" />
-        <p className="text-xs">
+        <p className="text-xs lg:text-sm">
           VIDEOBOX by Rodrigo Romero - MagicSoft is licensed under a Attribution 4.0 International
           (CC BY 4.0)
         </p>
