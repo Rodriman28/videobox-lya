@@ -28,7 +28,7 @@ const RecordingPage = () => {
       if (event.key === '5') {
         setTimeout(() => {
           stopRecording()
-        }, 1000)
+        }, 500)
       }
     }
 
@@ -116,14 +116,12 @@ const RecordingPage = () => {
             <Spinner />
           </div>
         )}
-        <Webcam audio={true} ref={webcamRef} width={1920} height={1080} />
+        <Webcam ref={webcamRef} width={1920} height={1080} />
         {isRecording ? (
-          <div className=" rounded-lg absolute bottom-8 right-8 px-2 py-1 align-middle justify-center ">
+          <div className=" rounded-lg absolute bottom-8 right-8 px-2 py-1 align-middle justify-center transition-colors ">
             <p
               className={`${
-                countdown <= 10
-                  ? 'text-6xl text-red-600 animate-ping animate-once animate-duration-[990ms] animate-ease-in'
-                  : 'text-8xl text-transparent bg-gradient-to-t from-indigo-900 via-blue-700 to-sky-500 bg-clip-text'
+                countdown <= 10 ? 'text-8xl text-red-600' : 'text-8xl text-gray-500 '
               }  font-bold`}
             >
               {countdown}
