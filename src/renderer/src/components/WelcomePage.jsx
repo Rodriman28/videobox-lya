@@ -1,10 +1,8 @@
 // src/components/WelcomePage.js
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import logo from '../../../../resources/logo.svg'
 import by from '../../../../resources/by.svg'
 import audiologo from '../../../../resources/audiologo.mp4'
-// import boton from '../../../../resources/boton.png'
 
 const WelcomePage = () => {
   const navigate = useNavigate()
@@ -29,25 +27,22 @@ const WelcomePage = () => {
 
   return (
     <div className="flex flex-col items-center pt-10 h-screen text-white">
-      {/* <img src={logo} alt="Logo de LYA Studio" width={'40%'} className="pb-4" /> */}
       <div className="flex items-center justify-center">
-        <video autoPlay loop width={'50%'} className="mb-10 rounded-lg">
+        <video autoPlay loop width={'70%'} className="rounded-lg">
           <source src={audiologo} type="video/mp4"></source>
         </video>
       </div>
-      {/* <h1 className="text-6xl pb-16 uppercase text-black">VideoBox</h1> */}
-      <p className="text-black text-xl lg:text-3xl font-bold pb-5">
-        ¡Graba un video de hasta 1 minuto para tus seres queridos!
+      <p className="text-white text-xl lg:text-3xl font-bold pb-5">
+        ¡Preparense para una experiencia única!
       </p>
-      <p className="text-black bg-clip-text text-xl lg:text-3xl font-bold pb-5">
-        Puedes finalizar el mensaje antes volviendo a presionar el botón.
+      {/* <p className="text-white bg-clip-text text-xl lg:text-3xl font-bold">
+        Graba hasta 1 minuto de video
+      </p> */}
+      <p className="animate-pulse animate-infinite animate-duration-[3000ms] animate-ease-in text-3xl lg:text-5xl font-bold pt-10 lg:pt-15">
+        ¡Presiona el botón para grabar tu mensaje!
       </p>
-      <p className="animate-pulse animate-infinite animate-duration-[3000ms] animate-ease-in text-2xl lg:text-4xl font-bold pt-10 lg:pt-15">
-        ¡Presiona el botón para comenzar a grabar tu mensaje!
-      </p>
-      {/* <img src={boton} alt="icono boton rojo" width={'5%'} className="pt-10 " /> */}
 
-      <div className="flex items-center absolute bottom-2 text-black font-medium">
+      <div className="flex items-center absolute bottom-2 text-white font-medium">
         <img src={by} width="70em" alt="Creative Commons logo" className="mx-2 rounded-md" />
         <p className="text-xs lg:text-sm">
           VIDEOBOX by Rodrigo Romero - MagicSoft is licensed under a Attribution 4.0 International
