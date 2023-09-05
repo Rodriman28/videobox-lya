@@ -109,13 +109,18 @@ const RecordingPage = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center h-screen overflow-hidden">
+      <div className="flex flex-col items-center justify-center h-screen overflow-hidden object-none">
         {!isRecording && (
           <div className="absolute">
             <Spinner />
           </div>
         )}
-        <Webcam ref={webcamRef} width={1920} height={1080} />
+        <Webcam
+          ref={webcamRef}
+          width={1920}
+          height={1080}
+          videoConstraints={{ width: 1920, height: 1080 }}
+        />
         {isRecording ? (
           <div className=" rounded-lg absolute bottom-8 right-8 px-2 py-1 align-middle justify-center transition-colors ">
             <p
