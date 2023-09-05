@@ -2,7 +2,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import by from '../../../../resources/by.svg'
-import audiologo from '../../../../resources/audiologo.mp4'
+import audiologo2 from '../../../../resources/audiologo2.mp4'
 
 const WelcomePage = () => {
   const navigate = useNavigate()
@@ -28,17 +28,17 @@ const WelcomePage = () => {
   return (
     <div className="flex flex-col items-center pt-10 h-screen text-white">
       <div className="flex items-center justify-center">
-        <video autoPlay loop width={'70%'} className="rounded-lg">
-          <source src={audiologo} type="video/mp4"></source>
+        <video
+          autoPlay
+          muted
+          loop
+          width={'75%'}
+          className="rounded-lg shadow-slate-600 shadow-[0px_1px_30px_10px_#fff]"
+        >
+          <source src={audiologo2} type="video/mp4"></source>
         </video>
       </div>
-      <p className="text-white text-xl lg:text-3xl font-bold pb-5">
-        ¡Preparense para una experiencia única!
-      </p>
-      {/* <p className="text-white bg-clip-text text-xl lg:text-3xl font-bold">
-        Graba hasta 1 minuto de video
-      </p> */}
-      <p className="animate-pulse animate-infinite animate-duration-[3000ms] animate-ease-in text-3xl lg:text-5xl font-bold pt-10 lg:pt-15">
+      <p className="animate-pulse animate-infinite animate-duration-[3000ms] animate-ease-in text-3xl lg:text-5xl font-bold pt-10 lg:pt-16">
         ¡Presiona el botón para grabar tu mensaje!
       </p>
 

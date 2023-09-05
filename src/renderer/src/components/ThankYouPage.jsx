@@ -1,7 +1,7 @@
 // src/components/ThankYouPage.js
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import audiologo from '../../../../resources/audiologo.mp4'
+import audiologofinal from '../../../../resources/audiologo-final.mp4'
 
 const ThankYouPage = () => {
   const [countdown, setCountdown] = useState(10)
@@ -18,13 +18,15 @@ const ThankYouPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <video autoPlay loop={true} width={'70%'}>
-        <source src={audiologo} />
+      <video
+        autoPlay
+        loop={true}
+        width={'75%'}
+        className="rounded-lg shadow-slate-600 shadow-[0px_1px_30px_10px_#fff]"
+      >
+        <source src={audiologofinal} />
       </video>
-      <h2 className="animate-jump animate-infinite animate-duration-[2000ms] animate-ease-out text-4xl lg:text-6xl mb-4 uppercase font-bold text-white">
-        ¡Gracias por tu mensaje!
-      </h2>
-      <h2 className="text-2xl text-white">Volviendo a inicio</h2>
+      <h2 className="text-2xl text-white pt-5">Volviendo a inicio</h2>
       <h2 className="text-2xl text-white">{countdown}</h2>
     </div>
   )

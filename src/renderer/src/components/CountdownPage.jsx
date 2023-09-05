@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import filmreel from '../../../../resources/filmreel.mp4'
 
 const CountdownPage = () => {
-  const [countdown, setCountdown] = useState(5)
+  const [countdown, setCountdown] = useState(9)
   const navigate = useNavigate()
 
   useEffect(() => {
