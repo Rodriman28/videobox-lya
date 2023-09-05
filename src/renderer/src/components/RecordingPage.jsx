@@ -44,8 +44,8 @@ const RecordingPage = () => {
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: true,
         video: {
-          width: { min: 1280, ideal: 1920, max: 1920 },
-          height: { min: 720, ideal: 1080, max: 1080 }
+          width: 1920,
+          height: 1080
         }
       })
       mediaRecorderRef.current = new MediaRecorder(stream)
@@ -58,7 +58,6 @@ const RecordingPage = () => {
 
       mediaRecorderRef.current.ondataavailable = (e) => {
         chunksRef.current.push(e.data)
-        setIsRecording(true)
       }
       mediaRecorderRef.current.onstop = async () => {
         const blob = new Blob(chunksRef.current, { type: 'video/mp4' })
